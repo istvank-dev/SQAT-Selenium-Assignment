@@ -19,15 +19,28 @@ Only do this if it doesn't run.
 ## Step 2: Gradle
 Use the command `docker pull gradle` to get the latest gradle image.
 
-## Step 3: Run build.gradle
-Instructions from [this](https://github.com/JacksonFurrier/SQAT) repo.
+## Step 3: Docker compose
+Run `docker compose up` in the main directory of the project, where the `docker-compose.yml` file is located.
 
-- On Nix systems `docker run -i -t --rm -u gradle -v "$PWD":YOUR_PATH_TO_SAMPLE -w YOUR_PATH_TO_SAMPLE gradle gradle <gradle-task>`
-- On Windows systems `docker run -i -t --rm -u gradle -v YOUR_PATH_TO_SAMPLE:YOUR_PATH_TO_SAMPLE -w YOUR_PATH_TO_SAMPLE gradle gradle <gradle-task>`
+Wait until its finished, the first time is going to be longer.
 
-### Example on windows:
-- project folder `C:\dev\project`
-- Tasks: `build` and `test`
+Watch out for the created distros names!
+It will look like this:
+```
+...
+[+] Running 5/5
+ ✔ ubuntu                                              Built           0.0s 
+ ✔ Network sqat-selenium-assignment_default            Created         0.1s 
+ ✔ Container sqat-selenium-assignment-selenium-1       Created         0.6s 
+ ✔ Container sqat-selenium-assignment-novnc-1          Created         0.1s 
+ ✔ Container sqat-selenium-assignment-ubuntu-1         Created         0.1s
+ ...
+ ```
 
-The command:
-`docker run -i -t --rm -u gradle -v "C:\dev\project:C:\dev\project" -w "C:\dev\project" gradle gradle build test`
+## Step 4: Run tests
+Docker compose created three running containers, from which you will need the ubuntu one (not selenium, not novnc).
+
+- Open a console for the running ubuntu distro: `docker exec -it <distro_name_ubuntu_1> bash`, in my case, its `sqat-selenium-assignment-ubuntu-1`.
+- Depending on your docker compose file, you need to navigate to the folder that contains the tests, in this repository's case, to `/home/selenium/tests`.
+- Open `http://localhost:8081/` to see the user interface of the ubuntu system, here you will see the tests being performed.
+- Run tests with gradle: `gradle clean build test` (every run will be clean).
