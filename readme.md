@@ -1,9 +1,8 @@
-I have problems with Docker Desktop on windows, seems like I have to reinstall it every week just so it would work.
-
 # How to use this repo (Win 10)
 
 ## Step 0: Uninstall docker desktop (optional)
-Only do this if it doesn't run.
+I have problems with Docker Desktop on windows, seems like I have to reinstall it every week just so it would work.
+Only do this if Docker doesn't work.
 
 1. Apps & Fetures > uninstall docker
 2. Delete `C:\ProgramData\DockerDesktop`(ProgramData is a hidden folder)
