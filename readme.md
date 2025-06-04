@@ -14,7 +14,7 @@ Only do this if it doesn't run.
 7. If you found one, delete it with `wsl --unregister <distribution_name>`
 
 ## Step 1: Install docker
-[Docker](https://www.docker.com)
+[Docker site](https://www.docker.com)
 
 ## Step 2: Gradle
 Use the command `docker pull gradle` to get the latest gradle image.
@@ -29,5 +29,5 @@ Instructions from [this](https://github.com/JacksonFurrier/SQAT) repo.
 - project folder `C:\dev\project`
 - Tasks: `build` and `test`
 
-Te command:
+The command:
 `docker run -i -t --rm -u gradle -v "C:\dev\project:C:\dev\project" -w "C:\dev\project" gradle gradle build test`
