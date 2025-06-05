@@ -27,29 +27,26 @@ public class SeleniumTests {
     }
     
     @Test
-    public void testSearch() {
+    public void testTitle() {
         MainPage mainPage = new MainPage(this.driver);
-        Assert.assertTrue(mainPage.getFooterText().contains("2025 ELTE Faculty of Informatics"));
-
-        SearchResultPage searchResultPage = mainPage.search("Students");
-        String bodyText = searchResultPage.getBodyText();
-        System.out.println(bodyText);
-        Assert.assertTrue(bodyText.contains("FOUND"));
-        Assert.assertTrue(bodyText.contains("For students"));
+        Assert.assertTrue(mainPage.getPageTitle().contains("Képküldés - Képfeltöltés - Ingyenes és gyors képfeltöltés közvetlen linkkel!"));
     }
-    
+
     @Test
-    public void testSearch2() {
-        String[] searchQueries={"something","","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"};  
-        for(String searchQuery : searchQueries) {  
-            MainPage mainPage = new MainPage(this.driver);
-            SearchResultPage searchResultPage = mainPage.search(searchQuery);
-            String bodyText = searchResultPage.getBodyText();
-            Assert.assertTrue(bodyText.contains("FOUND"));
-        }  
-    }
-    
+    public void testLoginThenLogout() {
+        // Log in
+        MainPage mainPage = new MainPage(this.driver);
+        Assert.assertTrue(mainPage.isLoginButtionDisplayed());
+        LoginPage loginPage = mainPage.goToLoginPage();
+        Assert.assertEquals(loginPage.getPageUrl(), "https://kepkuldes.com/login");
+        LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
 
+        // Asserting successful login
+        Assert.assertFalse(loggedInPage.isLoginButtionDisplayed());
+
+        // Log out
+        mainPage = loggedInPage.logout();
+    }
     
     @After
     public void close() {

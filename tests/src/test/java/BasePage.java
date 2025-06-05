@@ -11,12 +11,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 
-class PageBase {
+class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected String baseUrl = "https://kepkuldes.com/";
+    protected By loginButtonLocator = By.xpath("//li[@id='top-bar-signin']");
     
     
-    public PageBase(WebDriver driver) {
+    public BasePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 10);
     }
@@ -24,11 +26,24 @@ class PageBase {
     protected WebElement waitAndReturnElement(By locator) {
         this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return this.driver.findElement(locator);
-    } 
-    
-    public String getBodyText() {
-        WebElement bodyElement = this.waitAndReturnElement(By.tagName("body"));
-        return bodyElement.getText();
+    }
+
+    public String getPageTitle() {
+        return this.driver.getTitle();
+    }
+
+    public String getPageUrl() {
+        return this.driver.getCurrentUrl();
+    }
+
+    public boolean isLoginButtionDisplayed() {
+        try {
+            WebElement loginButton = waitAndReturnElement(loginButtonLocator);
+            return loginButton.isDisplayed();
+        } catch (Exception e)
+        {
+            return false;
+        }
     }
    
 }

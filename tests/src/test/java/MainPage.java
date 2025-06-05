@@ -11,25 +11,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 
-class MainPage extends PageBase {
+class MainPage extends BasePage {
 
-    private By footerBy = By.className("footer-block");
-    private By searchBarTogglerBy = By.xpath("//a[@class='search-bar-toggler']/i");
-    private By searchBarBy = By.name("search");
-    
     public MainPage(WebDriver driver) {
         super(driver);
-        this.driver.get("https://www.inf.elte.hu/en/");
-    }    
-    
-    public String getFooterText() {
-        return this.waitAndReturnElement(footerBy).getText();
+        this.driver.get(baseUrl);
     }
-    
-    public SearchResultPage search(String searchQuery) {
-        this.waitAndReturnElement(searchBarTogglerBy).click();
-        
-        this.waitAndReturnElement(searchBarBy).sendKeys(searchQuery + "\n");
-        return new SearchResultPage(this.driver);
+
+    public LoginPage goToLoginPage() {
+        WebElement loginPageButton = waitAndReturnElement(loginButtonLocator);
+        loginPageButton.click();
+        return new LoginPage(this.driver);
     }
 }
