@@ -111,7 +111,7 @@ public class MyLoginTest {
         LoginButtonElement.click();
         WebElement MessageHTMLElement = waitAndReturnElement(Message);
 
-        Assert.assertTrue(MessageHTMLElement.getText().contains("Your password is invalid! Forced fail"));
+        Assert.assertTrue(MessageHTMLElement.getText().contains("Your password is invalid!"));
     }
 
 
