@@ -103,6 +103,55 @@ public class SeleniumTests {
         MainPage finalMainPage = loggedOutPage.goToMainPage();
         Assert.assertTrue(finalMainPage.isLoginButtionDisplayed());
     }
+/*
+    @Test
+    public void testHoverInSettingsPage() {
+        // Log in
+        MainPage mainPage = new MainPage(this.driver);
+        LoginPage loginPage = mainPage.goToLoginPage();
+        LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
+
+        // Hover test
+        SettingsPage settingsPage = loggedInPage.goToSettingsPage();
+        Assert.assertFalse(settingsPage.isToolTipDisplayed());
+        try {
+            Thread.sleep(10000); // Wait for 2000 milliseconds (2 seconds)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        settingsPage.hoverOverUsernameInput();
+        try {
+            Thread.sleep(10000); // Wait for 2000 milliseconds (2 seconds)
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //Assert.assertTrue(settingsPage.isToolTipDisplayed());
+
+    }*/
+
+    @Test
+    public void testSendUserForm() {
+        // Log in
+        MainPage mainPage = new MainPage(this.driver);
+        LoginPage loginPage = mainPage.goToLoginPage();
+        LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
+
+        // GoTo settings page
+        SettingsPage settingsPage = loggedInPage.goToSettingsPage();
+        Assert.assertEquals(settingsPage.getPageUrl(), "https://kepkuldes.com/settings");
+
+        // Add bio text and submit form
+        String bioText = "Hello World!";
+        settingsPage.addAboutText(bioText);
+        String bioAfter = settingsPage.getAboutText();
+        Assert.assertEquals(bioText, bioAfter);
+
+        // Clean bio
+        settingsPage.addAboutText("");
+        String bioFinal = settingsPage.getAboutText();
+        Assert.assertEquals("", bioFinal);
+        Assert.assertNotEquals(bioAfter, bioFinal);
+    }   
     
     @After
     public void close() {

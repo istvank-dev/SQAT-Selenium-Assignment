@@ -16,6 +16,7 @@ class BasePage {
     protected WebDriverWait wait;
     protected String baseUrl = "https://kepkuldes.com/";
     protected By loginButtonLocator = By.xpath("//li[@id='top-bar-signin']");
+    protected By headerLocator = By.tagName("header");
     protected By bodyLocator = By.tagName("body");
     
     

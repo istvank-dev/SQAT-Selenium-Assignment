@@ -1,1 +1,4 @@
 "//a[contains(@href, 'aszf')]",aszf,Általános Szerzõdési Feltételek
+"//a[contains(@href, 'adatvedelem')]",adatvedelem,adatkezelési tájékoztató
+"//a[contains(@href, 'premium')]",premium,Prémium előfizetés
+"//a[contains(@href, 'contact')]",contact,Kapcsolatok
