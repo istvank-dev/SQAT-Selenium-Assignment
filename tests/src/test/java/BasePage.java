@@ -16,6 +16,7 @@ class BasePage {
     protected WebDriverWait wait;
     protected String baseUrl = "https://kepkuldes.com/";
     protected By loginButtonLocator = By.xpath("//li[@id='top-bar-signin']");
+    protected By bodyLocator = By.tagName("body");
     
     
     public BasePage(WebDriver driver) {
@@ -34,6 +35,10 @@ class BasePage {
 
     public String getPageUrl() {
         return this.driver.getCurrentUrl();
+    }
+
+    public String getBodyText() {
+        return waitAndReturnElement(bodyLocator).getText();
     }
 
     public boolean isLoginButtionDisplayed() {
