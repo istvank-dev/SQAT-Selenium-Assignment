@@ -33,7 +33,7 @@ public class SeleniumTests {
     }
 
     @Test
-    public void testLoginThenLogout() {
+    public void testLoginThenLogoutGoToMainPage() {
         // Log in
         MainPage mainPage = new MainPage(this.driver);
         //Assert.assertTrue(mainPage.isLoginButtionDisplayed());
@@ -45,7 +45,10 @@ public class SeleniumTests {
         //Assert.assertFalse(loggedInPage.isLoginButtionDisplayed());
 
         // Log out
-        mainPage = loggedInPage.logout();
+        LoggedOutPage loggedOutPage = loggedInPage.logout();
+
+        // Jump to main page from logout page
+        MainPage finalMainPage = loggedOutPage.goToMainPage();
     }
     
     @After

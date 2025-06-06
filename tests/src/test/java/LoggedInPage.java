@@ -22,14 +22,14 @@ class LoggedInPage extends BasePage {
         super(driver);
     }
 
-    public MainPage logout() {
+    public LoggedOutPage logout() {
         WebElement accountDropdownButton = waitAndReturnElement(accountDropdownButtonLocator);
         accountDropdownButton.click();
 
         WebElement logoutButton = waitAndReturnElement(logoutButtonLocator);
         logoutButton.click();
 
-        return new MainPage(this.driver);
+        return new LoggedOutPage(this.driver);
     }
 
     public ProfilePage goToProfilePage() {
