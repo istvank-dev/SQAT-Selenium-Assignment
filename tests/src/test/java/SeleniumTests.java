@@ -18,6 +18,8 @@ import java.io.File;
 public class SeleniumTests {
     public WebDriver driver;
     private final String avatarImagePath = "src/test/resources/avatar.png";
+    private final String usernmaeValid = "teszteleksqat";
+    private final String passwordValid = "tesztelek1";
     
     @Before
     public void setup()  throws MalformedURLException  {
@@ -40,7 +42,7 @@ public class SeleniumTests {
         Assert.assertTrue(mainPage.isLoginButtionDisplayed());
         LoginPage loginPage = mainPage.goToLoginPage();
         Assert.assertEquals(loginPage.getPageUrl(), "https://kepkuldes.com/login");
-        LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
+        LoggedInPage loggedInPage = loginPage.login(usernmaeValid, passwordValid); // For now its hardcoded credentials
 
         // Asserting successful login
         Assert.assertFalse(loggedInPage.isLoginButtionDisplayed());
@@ -90,16 +92,17 @@ public class SeleniumTests {
         Assert.assertTrue(mainPage.isLoginButtionDisplayed());
         LoginPage loginPage = mainPage.goToLoginPage();
         Assert.assertEquals(loginPage.getPageUrl(), "https://kepkuldes.com/login");
-        LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
+        LoggedInPage loggedInPage = loginPage.login(usernmaeValid, passwordValid); // For now its hardcoded credentials
 
         // Asserting successful login
         Assert.assertFalse(loggedInPage.isLoginButtionDisplayed());
 
         // GoTo settings page
-        SettingsAccountSubPage settingsPage = loggedInPage.goToSettingsPage();
+        SettingsAccountSubPage settingsAccountSubPage = loggedInPage.goToSettingsPage();
+        Assert.assertEquals(settingsAccountSubPage.getPageUrl(), "https://kepkuldes.com/settings");
 
         // Log out
-        LoggedOutPage loggedOutPage = settingsPage.logout();
+        LoggedOutPage loggedOutPage = settingsAccountSubPage.logout();
 
         // Jump to main page from logout page
         MainPage finalMainPage = loggedOutPage.goToMainPage();
@@ -111,7 +114,7 @@ public class SeleniumTests {
         // Log in
         MainPage mainPage = new MainPage(this.driver);
         LoginPage loginPage = mainPage.goToLoginPage();
-        LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
+        LoggedInPage loggedInPage = loginPage.login(usernmaeValid, passwordValid); // For now its hardcoded credentials
 
         // Hover test
         SettingsAccountSubPage settingsAccountSubPage = loggedInPage.goToSettingsPage();
@@ -125,7 +128,7 @@ public class SeleniumTests {
         // Log in
         MainPage mainPage = new MainPage(this.driver);
         LoginPage loginPage = mainPage.goToLoginPage();
-        LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
+        LoggedInPage loggedInPage = loginPage.login(usernmaeValid, passwordValid); // For now its hardcoded credentials
 
         // GoTo settings page
         SettingsAccountSubPage settingsAccountSubPage = loggedInPage.goToSettingsPage();
@@ -151,7 +154,7 @@ public class SeleniumTests {
         // Log in
         MainPage mainPage = new MainPage(this.driver);
         LoginPage loginPage = mainPage.goToLoginPage();
-        LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
+        LoggedInPage loggedInPage = loginPage.login(usernmaeValid, passwordValid); // For now its hardcoded credentials
 
         // GoTo settings page
         SettingsAccountSubPage settingsAccountSubPage = loggedInPage.goToSettingsPage();
@@ -176,7 +179,7 @@ public class SeleniumTests {
         // Log in
         MainPage mainPage = new MainPage(this.driver);
         LoginPage loginPage = mainPage.goToLoginPage();
-        LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
+        LoggedInPage loggedInPage = loginPage.login(usernmaeValid, passwordValid); // For now its hardcoded credentials
 
         // GoTo settings page
         SettingsAccountSubPage settingsAccountSubPage = loggedInPage.goToSettingsPage();
