@@ -11,10 +11,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 
-class SearchResultPage extends PageBase {
+class ProfilePage extends BasePage {
 
-    public SearchResultPage(WebDriver driver) {
+    public ProfilePage(WebDriver driver) {
         super(driver);
-    }    
-           
+    }
+
 }

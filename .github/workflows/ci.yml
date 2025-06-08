@@ -14,7 +14,7 @@ jobs:
 
     services:
       selenium:
-        image: selenium/standalone-chrome:3.141.59
+        image: selenium/standalone-chrome-debug:3.11.0-californium
 
     steps:
       - name: Checkout repository
