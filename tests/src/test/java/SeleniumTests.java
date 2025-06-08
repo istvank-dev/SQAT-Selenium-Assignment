@@ -12,10 +12,12 @@ import org.openqa.selenium.NoSuchElementException;
 import java.util.*;  
 import java.net.URL;
 import java.net.MalformedURLException;
+import java.io.File;
 
 
 public class SeleniumTests {
     public WebDriver driver;
+    private final String avatarImagePath = "src/test/resources/avatar.png";
     
     @Before
     public void setup()  throws MalformedURLException  {
@@ -94,7 +96,7 @@ public class SeleniumTests {
         Assert.assertFalse(loggedInPage.isLoginButtionDisplayed());
 
         // GoTo settings page
-        SettingsPage settingsPage = loggedInPage.goToSettingsPage();
+        SettingsAccountSubPage settingsPage = loggedInPage.goToSettingsPage();
 
         // Log out
         LoggedOutPage loggedOutPage = settingsPage.logout();
@@ -103,7 +105,7 @@ public class SeleniumTests {
         MainPage finalMainPage = loggedOutPage.goToMainPage();
         Assert.assertTrue(finalMainPage.isLoginButtionDisplayed());
     }
-/*
+
     @Test
     public void testHoverInSettingsPage() {
         // Log in
@@ -112,22 +114,11 @@ public class SeleniumTests {
         LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
 
         // Hover test
-        SettingsPage settingsPage = loggedInPage.goToSettingsPage();
-        Assert.assertFalse(settingsPage.isToolTipDisplayed());
-        try {
-            Thread.sleep(10000); // Wait for 2000 milliseconds (2 seconds)
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        settingsPage.hoverOverUsernameInput();
-        try {
-            Thread.sleep(10000); // Wait for 2000 milliseconds (2 seconds)
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        //Assert.assertTrue(settingsPage.isToolTipDisplayed());
-
-    }*/
+        SettingsAccountSubPage settingsAccountSubPage = loggedInPage.goToSettingsPage();
+        Assert.assertFalse(settingsAccountSubPage.isToolTipDisplayed());
+        settingsAccountSubPage.hoverOverUsernameInput();
+        Assert.assertTrue(settingsAccountSubPage.isToolTipDisplayed());
+    }
 
     @Test
     public void testSendUserForm() {
@@ -137,21 +128,48 @@ public class SeleniumTests {
         LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
 
         // GoTo settings page
-        SettingsPage settingsPage = loggedInPage.goToSettingsPage();
-        Assert.assertEquals(settingsPage.getPageUrl(), "https://kepkuldes.com/settings");
+        SettingsAccountSubPage settingsAccountSubPage = loggedInPage.goToSettingsPage();
+        Assert.assertEquals(settingsAccountSubPage.getPageUrl(), "https://kepkuldes.com/settings");
+        SettingsProfileSubPage settingsProfileSubPage = settingsAccountSubPage.goToProfileSubPage();
 
         // Add bio text and submit form
         String bioText = "Hello World!";
-        settingsPage.addAboutText(bioText);
-        String bioAfter = settingsPage.getAboutText();
+        settingsProfileSubPage.addAboutText(bioText);
+        String bioAfter = settingsProfileSubPage.getAboutText();
         Assert.assertEquals(bioText, bioAfter);
 
         // Clean bio
-        settingsPage.addAboutText("");
-        String bioFinal = settingsPage.getAboutText();
-        Assert.assertEquals("", bioFinal);
+        String emptyString = "";
+        settingsProfileSubPage.addAboutText(emptyString);
+        String bioFinal = settingsProfileSubPage.getAboutText();
+        Assert.assertEquals(emptyString, bioFinal);
         Assert.assertNotEquals(bioAfter, bioFinal);
-    }   
+    }
+/*
+    @Test
+    public void testUploadAvatarThenDelete() {
+        // Log in
+        MainPage mainPage = new MainPage(this.driver);
+        LoginPage loginPage = mainPage.goToLoginPage();
+        LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
+
+        // GoTo settings page
+        SettingsAccountSubPage settingsAccountSubPage = loggedInPage.goToSettingsPage();
+        SettingsProfileSubPage settingsProfileSubPage = settingsAccountSubPage.goToProfileSubPage();
+
+        // If theres no avatar, then there should be no delete button either
+        Assert.assertFalse(settingsProfileSubPage.isDeleteAvatarButtonDisplayed());
+
+        settingsProfileSubPage.uploadAvatarImage(avatarImagePath);
+
+        // Upload succesfull if we can delete the avatar
+        Assert.assertTrue(settingsProfileSubPage.isDeleteAvatarButtonDisplayed());
+
+        settingsProfileSubPage.deleteAvatarImage();
+
+        // Successfull delete, test will be repeatable
+        Assert.assertFalse(settingsProfileSubPage.isDeleteAvatarButtonDisplayed());
+    }*/
     
     @After
     public void close() {

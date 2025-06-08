@@ -42,14 +42,14 @@ class LoggedInPage extends BasePage {
         return new ProfilePage(this.driver);
     }
 
-    public SettingsPage goToSettingsPage() {
+    public SettingsAccountSubPage goToSettingsPage() {
         WebElement accountDropdownButton = waitAndReturnElement(accountDropdownButtonLocator);
         accountDropdownButton.click();
 
         WebElement settingsPageButton = waitAndReturnElement(settingsPageButtonLocator);
         settingsPageButton.click();
 
-        return new SettingsPage(this.driver);
+        return new SettingsAccountSubPage(this.driver);
     }
 
 }

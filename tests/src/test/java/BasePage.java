@@ -42,14 +42,17 @@ class BasePage {
         return waitAndReturnElement(bodyLocator).getText();
     }
 
-    public boolean isLoginButtionDisplayed() {
+    public boolean isWebElementDisplayed(By locator) {
         try {
-            WebElement loginButton = waitAndReturnElement(loginButtonLocator);
-            return loginButton.isDisplayed();
+            WebElement element = waitAndReturnElement(locator);
+            return element.isDisplayed();
         } catch (Exception e)
         {
             return false;
         }
     }
    
+    public boolean isLoginButtionDisplayed() {
+        return isWebElementDisplayed(loginButtonLocator);
+    }
 }
