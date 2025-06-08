@@ -22,4 +22,4 @@ jobs:
 
       - name: Run Gradle tests
         working-directory: ./tests
-        run: gradle test
+        run: gradle clean build test --info
