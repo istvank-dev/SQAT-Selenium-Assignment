@@ -18,10 +18,16 @@ class SettingsAccountSubPage extends SettingsBasePage {
     private By regionDropdownLocator = By.xpath("//select[@id='timezone-region']");
     private By regionOptionEuropeLocator = By.xpath("//option[@value='Europe']");
     private By regionOptionAntarcticaLocator = By.xpath("//option[@value='Antarctica']");
+    private By regionSelectedLocator = By.xpath("//select[@id='timezone-region']//option[@selected]");
 
     // THIS IS THE DEFAULT PAGE WHEN WE OPEN THE SETTINGS
     public SettingsAccountSubPage(WebDriver driver) {
         super(driver);
+    }
+
+    public String getRegionText() {
+        WebElement regionSelected = waitAndReturnElement(regionSelectedLocator);
+        return regionSelected.getText();
     }
 
     public void hoverOverUsernameInput() {

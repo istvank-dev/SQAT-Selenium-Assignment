@@ -145,7 +145,7 @@ public class SeleniumTests {
         Assert.assertEquals(emptyString, bioFinal);
         Assert.assertNotEquals(bioAfter, bioFinal);
     }
-/*
+
     @Test
     public void testUploadAvatarThenDelete() {
         // Log in
@@ -169,7 +169,20 @@ public class SeleniumTests {
 
         // Successfull delete, test will be repeatable
         Assert.assertFalse(settingsProfileSubPage.isDeleteAvatarButtonDisplayed());
-    }*/
+    }
+
+    @Test
+    public void testReadDropdownSelected() {
+        // Log in
+        MainPage mainPage = new MainPage(this.driver);
+        LoginPage loginPage = mainPage.goToLoginPage();
+        LoggedInPage loggedInPage = loginPage.login("teszteleksqat", "tesztelek1"); // For now its hardcoded credentials
+
+        // GoTo settings page
+        SettingsAccountSubPage settingsAccountSubPage = loggedInPage.goToSettingsPage();
+
+        Assert.assertEquals("Europe", settingsAccountSubPage.getRegionText());
+    }
     
     @After
     public void close() {

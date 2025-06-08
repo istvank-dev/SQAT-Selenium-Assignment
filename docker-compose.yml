@@ -27,6 +27,8 @@ services:
       - VNC_NO_PASSWORD=1
       - SCREEN_WIDTH=1800
       - SCREEN_HEIGHT=960
+    volumes:
+      - ./tests:/home/selenium/tests
     ports:
       - "4444:4444"
       - "5900:5900"
