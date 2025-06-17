@@ -15,6 +15,9 @@ jobs:
     services:
       selenium:
         image: selenium/standalone-chrome-debug:3.11.0-californium
+        env:
+          SCREEN_WIDTH: 1800
+          SCREEN_HEIGHT: 960
 
     steps:
       - name: Checkout repository
