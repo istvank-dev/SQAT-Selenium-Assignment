@@ -57,9 +57,9 @@ class SettingsProfileSubPage extends SettingsBasePage {
 
         js.executeScript("arguments[0].style.display='block'; arguments[0].style.visibility='visible';", avatarUploadInput);
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOf(avatarUploadInput));
-        wait.until(ExpectedConditions.elementToBeClickable(avatarUploadInput));
+        //WebDriverWait wait = new WebDriverWait(driver, 10);
+        //wait.until(ExpectedConditions.visibilityOf(avatarUploadInput));
+        //wait.until(ExpectedConditions.elementToBeClickable(avatarUploadInput));
 
         File img = new File(imagePath);
         if (img.exists()) {

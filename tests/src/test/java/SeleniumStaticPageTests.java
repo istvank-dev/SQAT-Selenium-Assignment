@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.List;
 import org.openqa.selenium.By;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 
 @RunWith(Parameterized.class)
 public class SeleniumStaticPageTests {

@@ -13,6 +13,7 @@ import java.util.*;
 import java.net.URL;
 import java.net.MalformedURLException;
 import java.io.File;
+import java.time.Duration;
 
 
 public class SeleniumTests {
