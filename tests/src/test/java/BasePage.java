@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import java.time.Duration;
 
 
 class BasePage {
@@ -22,12 +23,12 @@ class BasePage {
     
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 10);
+        this.wait = new WebDriverWait(driver, 15);
     }
     
     protected WebElement waitAndReturnElement(By locator) {
-        this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        return this.driver.findElement(locator);
+        new WebDriverWait(driver, Duration.ofSeconds(15)).until(ExpectedConditions.presenceOfElementLocated(locator));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     public String getPageTitle() {

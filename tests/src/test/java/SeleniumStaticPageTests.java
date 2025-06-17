@@ -56,7 +56,8 @@ public class SeleniumStaticPageTests {
     @Before
     public void setup() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
-        driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
+        driver = new RemoteWebDriver(new URL("http://selenium:4444"), options);
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30)); // Add this
         driver.manage().window().maximize();
         mainPage = new MainPage(driver);
     }
